@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test localization core
+        run: node .\tests\localization-extension.test.js
+      - name: Test shareable assistant boundary
+        run: node .\tests\shareable-assistant.test.js
+      - name: Check JavaScript syntax
+        shell: pwsh
+        run: |
+          node --check .\src\localization-extension\translation-core.js
+          node --check .\src\localization-extension\content.js
+      - name: Build Windows package
+        shell: pwsh
+        run: .\build.ps1
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Antigravity-Chinese-Assistant-${{ github.ref_name }}-windows-x64
+          path: dist/*-windows-x64.zip
+          if-no-files-found: error

@@ -1,0 +1,8 @@
+dist/
+releases/
+.work/
+*.user
+*.suo
+*.log
+Thumbs.db
+.DS_Store
