@@ -1,12 +1,36 @@
 (function () {
   'use strict';
 
+  // ── 永久隐藏右上角"安装 IDE"/"打开 IDE"/骨架加载按钮 ──────────────────
+  // 必须在 guard 之前执行，确保每次汉化加载器重注入时都能保证样式存在
+  (function injectHideIdeStyle() {
+    var style = document.getElementById('__agy_hide_ide_btn__');
+    if (!style) {
+      style = document.createElement('style');
+      style.id = '__agy_hide_ide_btn__';
+      style.textContent = [
+        'button[data-testid="install-editor"]',
+        'button[data-testid^="open-editor"]',
+        'button[data-testid="editor-loading"]',
+        'a[data-testid="install-editor"]',
+        'a[data-testid^="open-editor"]'
+      ].join(',\n') + ' { display: none !important; }';
+      (document.head || document.documentElement).appendChild(style);
+    }
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
+
   // The CDP loader and the Chromium fallback can both reach the same
   // document during an upgrade.  Installing a second observer would make
   // every React update traverse the page more than once.
   var core = globalThis.AntigravityZhCore;
   if (!core) return;
-  if (globalThis.__AntigravityZhContentInstalled) return;
+  if (globalThis.__AntigravityZhContentInstalled) {
+    if (typeof globalThis.__AntigravityZhForceTranslate === 'function') {
+      globalThis.__AntigravityZhForceTranslate();
+    }
+    return;
+  }
   globalThis.__AntigravityZhContentInstalled = true;
 
   var DEBOUNCE_MS = 80;
@@ -69,8 +93,9 @@
   function isUiTextElement(element) {
     if (!element || isProtectedTextElement(element)) return false;
     return !!closest(element,
-      'button, [role="button"], label, h1, h2, h3, h4, h5, h6, ' +
-      '[role="heading"], [data-testid^="settings-nav-item-"]'
+      'button, [role="button"], [role="menuitem"], [role="menuitemcheckbox"], ' +
+      '[role="menuitemradio"], [role="menu"], [role="option"], [role="tab"], ' +
+      'label, h1, h2, h3, h4, h5, h6, [role="heading"], [data-testid^="settings-nav-item-"]'
     );
   }
 
@@ -80,19 +105,45 @@
     return typeof location !== 'undefined' && /(?:^|[?&])settingsOpen=true(?:&|$)/i.test(location.search || '');
   }
 
+  function isInstantUiNode(node) {
+    if (!node) return false;
+    var el = node.nodeType === 1 ? node : node.parentElement;
+    if (!el || isProtectedTextElement(el)) return false;
+    if (closest(el, '[role="dialog"], [role="menu"], [aria-modal="true"], [data-testid*="settings" i], [class*="modal" i], [class*="settings" i], [data-testid^="settings-nav-item-"]')) {
+      return true;
+    }
+    return isSettingsSurface(el) || isUiTextElement(el);
+  }
+
+  function isToolOrStatusPillText(text) {
+    if (!text || typeof text !== 'string') return false;
+    var trimmed = text.trim();
+    if (/^(?:Sends after agent finishes working|Error Verification Required|Verification Required|Drag to select a region to comment|Untitled Conversation|CLI Project|Working|Exploring|Analyzed|Preview|Raw)$/i.test(trimmed)) return true;
+    if (/^\d+\s+tasks?\s+running$/i.test(trimmed)) return true;
+    if (/^\d+\s+files?\s+changed(?:\s*[+-]\d+.*)?$/i.test(trimmed)) return true;
+    if (/^(?:Running|Ran|Explored|正在运行|已运行|已探索)?\s*\d+\s*(?:search(?:es)?|commands?|tasks?|files?|条命令|次搜索|个任务|个文件)(?:,\s*\d+\s*(?:search(?:es)?|commands?|tasks?|files?|条命令|次搜索|个任务|个文件))*$/i.test(trimmed)) return true;
+    return false;
+  }
+
   function shouldTranslateTextNode(node) {
     if (!node || node.nodeType !== Node.TEXT_NODE || !node.parentElement) return false;
+    var raw = node.nodeValue;
+    if (!raw || raw.length > 5000) return false;
+    var val = raw.trim();
+    if (val === 'Queued Messages' || val === 'Queued Message' || val === 'Queued') return true;
+    if (isToolOrStatusPillText(val)) return true;
     if (!isProtectedTextElement(node.parentElement)) return true;
     var row = closest(node.parentElement, '[data-testid="conversation-row-sidebar"]');
-    return !!row && /^\s*\d+\s*(?:[smhd]|seconds?|minutes?|hours?|days?)\s*$/i.test(node.nodeValue || '');
+    return !!row && /^\s*\d+\s*(?:[smhd]|seconds?|minutes?|hours?|days?)\s*$/i.test(val);
   }
 
   function translateTextNode(node) {
     if (!shouldTranslateTextNode(node)) return 0;
     var oldValue = node.nodeValue;
     var rowTimestamp = closest(node.parentElement, '[data-testid="conversation-row-sidebar"]');
+    var isPill = isToolOrStatusPillText(oldValue);
     var useUiTranslation = isUiTextElement(node.parentElement) ||
-      isSettingsSurface(node.parentElement) || rowTimestamp;
+      isSettingsSurface(node.parentElement) || rowTimestamp || isPill;
     var previous = lastTextValues.get(node);
     if (previous && previous.value === oldValue && previous.useUi === !!useUiTranslation) return 0;
     var newValue = useUiTranslation
@@ -155,6 +206,13 @@
     return changed;
   }
 
+  globalThis.__AntigravityZhForceTranslate = function () {
+    core = globalThis.AntigravityZhCore || core;
+    lastTextValues = new WeakMap();
+    lastAttributeValues = new WeakMap();
+    if (document.body) translateSubtree(document.body);
+  };
+
   function contains(ancestor, node) {
     if (!ancestor || !node) return false;
     if (ancestor === node) return true;
@@ -212,11 +270,24 @@
       if (applying) return;
       records.forEach(function (record) {
         if (record.type === 'attributes' || record.type === 'characterData') {
-          requestFlush(record.target);
+          if (isInstantUiNode(record.target)) {
+            applying = true;
+            try { translateSubtree(record.target); }
+            finally { applying = false; }
+          } else {
+            requestFlush(record.target);
+          }
           return;
         }
         for (var i = 0; i < record.addedNodes.length; i += 1) {
-          requestFlush(record.addedNodes[i]);
+          var added = record.addedNodes[i];
+          if (isInstantUiNode(added)) {
+            applying = true;
+            try { translateSubtree(added); }
+            finally { applying = false; }
+          } else {
+            requestFlush(added);
+          }
         }
       });
     });
@@ -229,9 +300,83 @@
       attributeFilter: core.ATTRIBUTES
     });
 
-    requestFlush(document.body || document.documentElement);
+    applying = true;
+    try {
+      translateSubtree(document.body || document.documentElement);
+    } finally {
+      applying = false;
+    }
     document.documentElement.setAttribute('data-antigravity-zhcn', core.VERSION);
   }
+
+  globalThis.__AntigravityAutoResume = async function (maxCount, resumeText) {
+    maxCount = typeof maxCount === 'number' ? maxCount : 3;
+    resumeText = typeof resumeText === 'string' ? resumeText : '1';
+
+    var rows = Array.from(document.querySelectorAll('[data-testid="conversation-row-sidebar"]'));
+    if (rows.length === 0) {
+      return { success: false, reason: 'no_conversations_found' };
+    }
+
+    var targetCount = Math.min(maxCount, rows.length);
+    var results = [];
+
+    for (var i = 0; i < targetCount; i++) {
+      var row = rows[i];
+      var a = row.querySelector('a');
+      var href = a ? a.getAttribute('href') : null;
+      if (!a) {
+        results.push({ index: i + 1, success: false, reason: 'no_anchor' });
+        continue;
+      }
+
+      a.click();
+      await new Promise(function (res) { setTimeout(res, 800); });
+
+      var stopButton = document.querySelector('button[aria-label*="Stop"], button[data-testid*="stop"]');
+      if (stopButton) {
+        results.push({ index: i + 1, href: href, skipped: true, reason: 'task_currently_running' });
+        continue;
+      }
+
+      var editable = document.querySelector('[data-lexical-editor="true"]');
+      if (!editable) {
+        results.push({ index: i + 1, href: href, success: false, reason: 'editor_not_found' });
+        continue;
+      }
+
+      var currentText = (editable.textContent || '').trim();
+      if (currentText.length > 0 && currentText !== resumeText) {
+        results.push({ index: i + 1, href: href, skipped: true, reason: 'draft_exists' });
+        continue;
+      }
+
+      editable.focus();
+      document.execCommand('insertText', false, resumeText);
+      await new Promise(function (res) { setTimeout(res, 200); });
+
+      var sendBtn = document.querySelector('button[data-testid="send-button"]');
+      if (sendBtn && !sendBtn.disabled) {
+        sendBtn.click();
+        results.push({ index: i + 1, href: href, success: true, text: resumeText });
+      } else {
+        results.push({ index: i + 1, href: href, success: false, reason: 'send_button_disabled' });
+      }
+
+      await new Promise(function (res) { setTimeout(res, 600); });
+    }
+
+    if (rows.length > 0) {
+      var firstLink = rows[0].querySelector('a');
+      if (firstLink) firstLink.click();
+    }
+
+    return {
+      success: true,
+      processed: results.length,
+      results: results
+    };
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', observeDocument, { once: true });

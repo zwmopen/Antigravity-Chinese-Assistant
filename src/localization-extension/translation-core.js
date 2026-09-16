@@ -8,6 +8,74 @@
   // into ordinary descriptions, skill text, or user-authored titles.
   var PHRASE_PAIRS = Object.freeze([
   [
+    "See our",
+    "请查阅"
+  ],
+  [
+    "See our ",
+    "请查阅 "
+  ],
+  [
+    "See our ",
+    "请查阅 "
+  ],
+  [
+    "troubleshooting guide",
+    "故障排查指南"
+  ],
+  [
+    "for more help.",
+    "获取更多帮助。"
+  ],
+  [
+    "Queued Messages",
+    "已排队消息"
+  ],
+  [
+    "Queued Message",
+    "已排队消息"
+  ],
+  [
+    "Queued",
+    "已排队"
+  ],
+  [
+    "Conversation Log",
+    "会话记录"
+  ],
+  [
+    "Load older messages",
+    "加载更早消息"
+  ],
+  [
+    "Agent terminated due to error",
+    "智能体由于异常已终止"
+  ],
+  [
+    "You can prompt the model to try again or start a",
+    "您可以提示模型重试或发起"
+  ],
+  [
+    "if the error persists.",
+    "如果错误持续存在。"
+  ],
+  [
+    "See our troubleshooting guide for more help.",
+    "查看故障排除指南获取更多帮助。"
+  ],
+  [
+    "Queued Messages",
+    "已排队消息"
+  ],
+  [
+    "Queued message",
+    "已排队消息"
+  ],
+  [
+    "Copy debug info",
+    "复制调试信息"
+  ],
+  [
     "Learn more.",
     "了解更多。"
   ],
@@ -1494,6 +1562,279 @@
   [
     "Open Editor Settings",
     "打开编辑器设置"
+  ]
+  ,
+  [
+    "Enable inline actions for background tasks",
+    "为后台任务启用浮动卡片"
+  ]  ,
+  [
+    "Show a floating notification card when background tasks require review or input.",
+    "当后台任务需要审核或输入时显示浮动通知卡片。"
+  ]  ,
+  [
+    "Inline Actions feedback",
+    "浮动通知卡片反馈"
+  ]  ,
+  [
+    "Background task requires your approval",
+    "后台任务需要您的审批"
+  ]  ,
+  [
+    "Background task requires your input",
+    "后台任务需要您的输入"
+  ]  ,
+  [
+    "Allow execution in background",
+    "允许在后台执行"
+  ]  ,
+  [
+    "Approve command and continue",
+    "批准命令并继续"
+  ]  ,
+  [
+    "Deny command and pause",
+    "拒绝命令并暂停"
+  ]  ,
+  [
+    "Grant permissions for this task",
+    "为此任务授予权限"
+  ]  ,
+  [
+    "Run in background mode",
+    "在后台模式运行"
+  ]  ,
+  [
+    "Bring task to foreground",
+    "将任务置于前台"
+  ]  ,
+  [
+    "Task completed in background",
+    "后台任务已完成"
+  ]  ,
+  [
+    "Task failed in background",
+    "后台任务失败"
+  ]  ,
+  [
+    "Use AI credits when model quota is exhausted",
+    "当模型配额耗尽时使用 AI 积分"
+  ]  ,
+  [
+    "Remaining AI Credits",
+    "剩余 AI 积分"
+  ]  ,
+  [
+    "Monthly Quota Reset",
+    "每月配额重置"
+  ]  ,
+  [
+    "Quota usage breakdown",
+    "配额用量明细"
+  ]  ,
+  [
+    "Auto-refill credits",
+    "自动充值积分"
+  ]  ,
+  [
+    "Credit balance low",
+    "积分余额不足"
+  ]  ,
+  [
+    "Manage billing and subscription",
+    "管理账单与订阅"
+  ]  ,
+  [
+    "Billing details",
+    "账单详情"
+  ]  ,
+  [
+    "Current billing cycle",
+    "当前账单周期"
+  ]  ,
+  [
+    "Model usage limit reached",
+    "已达到模型使用上限"
+  ]  ,
+  [
+    "Rate limit exceeded. Please try again later.",
+    "超出速率限制，请稍后重试。"
+  ]  ,
+  [
+    "Credits remaining",
+    "剩余积分"
+  ]  ,
+  [
+    "Out of model quota",
+    "模型配额已耗尽"
+  ]  ,
+  [
+    "Model quota refreshed",
+    "模型配额已刷新"
+  ]  ,
+  [
+    "Reconnecting to server...",
+    "正在重新连接到服务器…"
+  ]  ,
+  [
+    "Disconnected from server. Attempting to reconnect...",
+    "已与服务器断开连接。正在尝试重连…"
+  ]  ,
+  [
+    "Connection restored.",
+    "连接已恢复。"
+  ]  ,
+  [
+    "Network connection lost. Please check your network settings.",
+    "网络连接丢失，请检查您的网络设置。"
+  ]  ,
+  [
+    "Failed to reach Google Generative AI endpoint.",
+    "无法访问 Google 生成式 AI 服务端点。"
+  ]  ,
+  [
+    "Deep thinking in progress...",
+    "正在深度思考中…"
+  ]  ,
+  [
+    "Searching codebase...",
+    "正在检索代码库…"
+  ]  ,
+  [
+    "Reading files...",
+    "正在读取文件…"
+  ]  ,
+  [
+    "Analyzing directory structure...",
+    "正在分析目录结构…"
+  ]  ,
+  [
+    "Executing terminal command...",
+    "正在执行终端命令…"
+  ]  ,
+  [
+    "Generating solution...",
+    "正在生成解决方案…"
+  ]  ,
+  [
+    "Verifying implementation...",
+    "正在验证实现…"
+  ]  ,
+  [
+    "Agent stopped by user",
+    "智能体已被用户终止"
+  ]  ,
+  [
+    "Agent paused by user",
+    "智能体已被用户暂停"
+  ]  ,
+  [
+    "Resume execution",
+    "继续执行"
+  ]  ,
+  [
+    "Cancel execution",
+    "取消执行"
+  ]  ,
+  [
+    "Workspace indexed successfully",
+    "工作区索引构建成功"
+  ]  ,
+  [
+    "Indexing workspace...",
+    "正在为工作区构建索引…"
+  ]  ,
+  [
+    "Re-index workspace",
+    "重新构建工作区索引"
+  ]  ,
+  [
+    "Artifact created",
+    "方案产物已生成"
+  ]  ,
+  [
+    "Artifact updated",
+    "方案产物已更新"
+  ]  ,
+  [
+    "View artifact",
+    "查看方案产物"
+  ]  ,
+  [
+    "Diff view",
+    "代码差异对比"
+  ]  ,
+  [
+    "Accept changes",
+    "接受变更"
+  ]  ,
+  [
+    "Reject changes",
+    "拒绝变更"
+  ]  ,
+  [
+    "Keep current changes",
+    "保留当前变更"
+  ]  ,
+  [
+    "Revert all changes",
+    "还原所有更改"
+  ]  ,
+  [
+    "Apply this change",
+    "应用此变更"
+  ]  ,
+  [
+    "Discard this change",
+    "放弃此变更"
+  ]  ,
+  [
+    "Show inline diff",
+    "显示行内差异"
+  ]  ,
+  [
+    "Show side-by-side diff",
+    "显示双栏差异"
+  ]  ,
+  [
+    "Review proposed modifications before applying",
+    "在应用前审查提议的修改"
+  ]  ,
+  [
+    "Allow once",
+    "仅允许一次"
+  ]  ,
+  [
+    "Always allow for this session",
+    "本次会话始终允许"
+  ]  ,
+  [
+    "Always deny",
+    "始终拒绝"
+  ]  ,
+  [
+    "View terminal output",
+    "查看终端输出"
+  ]  ,
+  [
+    "Clear terminal output",
+    "清空终端输出"
+  ],
+  [
+    "Are you sure you want to delete this conversation? This action cannot be undone.",
+    "您确定要删除此对话吗？此操作无法撤销。"
+  ],
+  [
+    "No groups yet",
+    "暂无分组"
+  ],
+  [
+    "Collapse queued messages",
+    "折叠排队消息"
+  ],
+  [
+    "Expand queued messages",
+    "展开排队消息"
   ]
 ]);
 
@@ -4037,6 +4378,234 @@
   [
     "More",
     "更多"
+  ],
+  [
+    "Pin",
+    "固定"
+  ],
+  [
+    "Unpin",
+    "取消固定"
+  ],
+  [
+    "Archive",
+    "归档"
+  ],
+  [
+    "Restore",
+    "恢复"
+  ],
+  [
+    "Split",
+    "分屏"
+  ],
+  [
+    "Split Right",
+    "向右分屏"
+  ],
+  [
+    "Split Down",
+    "向下分屏"
+  ],
+  [
+    "Replace With New",
+    "替换为新建"
+  ],
+  [
+    "Remove From Split",
+    "从分屏中移除"
+  ],
+  [
+    "Conversation Name",
+    "对话名称"
+  ],
+  [
+    "Conversation ID",
+    "对话 ID"
+  ],
+  [
+    "Workspace Name",
+    "工作区名称"
+  ],
+  [
+    "Worktree Name",
+    "工作树名称"
+  ],
+  [
+    "Project Name",
+    "项目名称"
+  ],
+  [
+    "Fork",
+    "派生"
+  ],
+  [
+    "Share",
+    "分享"
+  ],
+  [
+    "Share Conversation",
+    "分享对话"
+  ],
+  [
+    "Copy Link",
+    "复制链接"
+  ],
+  [
+    "Code Search",
+    "代码搜索"
+  ],
+  [
+    "Trajectory Debug View",
+    "轨迹调试视图"
+  ],
+  [
+    "Command Center",
+    "命令中心"
+  ],
+  [
+    "Mark Read",
+    "标为已读"
+  ],
+  [
+    "Mark Unread",
+    "标为未读"
+  ],
+  [
+    "Move to Group",
+    "移动到分组"
+  ],
+  [
+    "New Group",
+    "新建分组"
+  ],
+  [
+    "Create Group",
+    "创建分组"
+  ],
+  [
+    "Remove from Group",
+    "从分组中移除"
+  ],
+  [
+    "No groups yet",
+    "暂无分组"
+  ],
+  [
+    "Are you sure you want to delete this conversation? This action cannot be undone.",
+    "您确定要删除此对话吗？此操作无法撤销。"
+  ],
+  [
+    "Collapse queued messages",
+    "折叠排队消息"
+  ],
+  [
+    "Expand queued messages",
+    "展开排队消息"
+  ],
+  [
+    "Cancel (Ctrl+D)",
+    "取消 (Ctrl+D)"
+  ],
+  [
+    "Maximize Pane",
+    "最大化面板"
+  ],
+  [
+    "Restore Pane",
+    "还原面板"
+  ],
+  [
+    "Overview",
+    "概览"
+  ],
+  [
+    "Overview tab",
+    "概览标签页"
+  ],
+  [
+    "Review tab",
+    "审查标签页"
+  ],
+  [
+    "Terminal tab",
+    "终端标签页"
+  ],
+  [
+    "Scroll to Bottom",
+    "滚动到底部"
+  ],
+  [
+    "Stop execution",
+    "停止执行"
+  ],
+  [
+    "View Usage",
+    "查看用量明细"
+  ],
+  [
+    "Skills Used",
+    "已使用的技能"
+  ],
+  [
+    "Uncommitted",
+    "未提交"
+  ],
+  [
+    "Auxiliary Pane",
+    "辅助面板"
+  ],
+  [
+    "Custom tool call output is missing",
+    "自定义工具调用输出缺失"
+  ],
+  [
+    "Drag to select a region to comment",
+    "拖拽框选区域以添加批注"
+  ],
+  [
+    "Untitled Conversation",
+    "未命名对话"
+  ],
+  [
+    "CLI Project",
+    "命令行项目"
+  ],
+  [
+    "Sends after agent finishes working",
+    "智能体结束工作后发送"
+  ],
+  [
+    "Error Verification Required",
+    "错误：需要完成验证"
+  ],
+  [
+    "Verification Required",
+    "需要完成验证"
+  ],
+  [
+    "Working",
+    "工作中"
+  ],
+  [
+    "Exploring",
+    "探索中"
+  ],
+  [
+    "Analyzed",
+    "已分析"
+  ],
+  [
+    "Preview",
+    "预览"
+  ],
+  [
+    "Raw",
+    "源码"
+  ],
+  [
+    "Uploads",
+    "上传文件"
   ]
 ]);
 
@@ -4110,6 +4679,25 @@
   }
 
   var DYNAMIC_PATTERNS = Object.freeze([
+    { pattern: /^(?:Thought for|深度思考)\s*(\d+)\s*m(?:in(?:utes?)?)?(?:\s*(\d+)\s*s(?:econds?)?)?$/i, replace: function (_m, mins, secs) { return '深度思考 ' + mins + ' 分钟' + (secs ? ' ' + secs + ' 秒' : ''); } },
+    { pattern: /^(?:Thought for|深度思考)\s*(\d+)\s*s(?:econds?)?$/i, replace: function (_m, n) { return '深度思考 ' + n + ' 秒'; } },
+    { pattern: /^(?:Thought for|深度思考)\s*(\d+)\s*h(?:ours?)?$/i, replace: function (_m, n) { return '深度思考 ' + n + ' 小时'; } },
+    { pattern: /^(\d+)\s+files?\s+changed(?:\s*([+-]\d+.*))?$/i, replace: function (_m, n, diff) { return n + ' 个修改的文件' + (diff ? ' ' + diff : ''); } },
+    { pattern: /^Send now:\s*(.+)$/i, replace: function (_m, text) { return '立即发送：' + text; } },
+    { pattern: /^Delete:\s*(.+)$/i, replace: function (_m, text) { return '删除：' + text; } },
+    { pattern: /^Edit:\s*(.+)$/i, replace: function (_m, text) { return '编辑：' + text; } },
+    { pattern: /^Opens external link:\s*(.+)$/i, replace: function (_m, text) { return '打开外部链接：' + text; } },
+    { pattern: /^(?:Running|正在运行)\s*(\d+)\s*(?:commands?|条命令|个命令)$/i, replace: function (_m, n) { return '正在运行 ' + n + ' 条命令'; } },
+    { pattern: /^(?:Ran|已运行)\s*(\d+)\s*(?:commands?|条命令|个命令)$/i, replace: function (_m, n) { return '已运行 ' + n + ' 条命令'; } },
+    { pattern: /^(?:Explored|已探索)\s*(\d+)\s*(?:search(?:es)?|次搜索)$/i, replace: function (_m, n) { return '已探索 ' + n + ' 次搜索'; } },
+    { pattern: /^(?:Explored|已探索)\s*(\d+)\s*(?:tasks?|个任务)$/i, replace: function (_m, n) { return '已探索 ' + n + ' 个任务'; } },
+    { pattern: /^(\d+)\s+tasks?\s+running$/i, replace: function (_m, n) { return n + ' 个任务正在运行'; } },
+    { pattern: /^(\d+)\s+search(?:es)?$/i, replace: function (_m, n) { return n + ' 次搜索'; } },
+    { pattern: /^(\d+)\s+commands?$/i, replace: function (_m, n) { return n + ' 条命令'; } },
+    { pattern: /^(\d+)\s+tasks?$/i, replace: function (_m, n) { return n + ' 个任务'; } },
+    { pattern: /^(\d+)\s+files?$/i, replace: function (_m, n) { return n + ' 个文件'; } },
+    { pattern: /^(\d+)\s+files?,\s*(\d+)\s+tasks?$/i, replace: function (_m, f, t) { return f + ' 个文件，' + t + ' 个任务'; } },
+    { pattern: /^Queued Messages?$/i, replace: function () { return '已排队消息'; } },
     { pattern: /Requesting permission to (read access to this path|write access to this path|reading this URL|executing actions on this URL|running this command outside the sandbox|running this command|using this MCP tool) (.+)/i, replace: function (_m, action, target) {
         var labels = { 'read access to this path': '读取此路径', 'write access to this path': '写入此路径', 'reading this URL': '读取此 URL', 'executing actions on this URL': '在此 URL 上执行操作', 'running this command outside the sandbox': '在沙盒外运行此命令', 'running this command': '运行此命令', 'using this MCP tool': '使用此 MCP 工具' };
         return '正在请求权限：' + (labels[action] || action) + ' ' + target;
@@ -4132,9 +4720,10 @@
         var scopes = { 'when not in a project': '未处于项目时', 'in this project': '此项目中', 'in this workspace': '此工作区' };
         return '是，并' + (scope ? '在' + scopes[scope] : '') + '始终允许';
       } },
-    { pattern: /^Worked for (\d+)\s*s$/i, replace: function (_m, n) { return '已工作 ' + n + ' 秒'; } },
-    { pattern: /^Worked for (\d+)\s*m$/i, replace: function (_m, n) { return '已工作 ' + n + ' 分钟'; } },
-    { pattern: /^Worked for (\d+)\s*h$/i, replace: function (_m, n) { return '已工作 ' + n + ' 小时'; } },
+    { pattern: /^(?:Worked for|已工作)\s*(\d+)\s*s(?:econds?)?$/i, replace: function (_m, n) { return '已工作 ' + n + ' 秒'; } },
+    { pattern: /^(?:Worked for|已工作)\s*(\d+)\s*m(?:inutes?)?$/i, replace: function (_m, n) { return '已工作 ' + n + ' 分钟'; } },
+    { pattern: /^(?:Worked for|已工作)\s*(\d+)\s*h(?:ours?)?$/i, replace: function (_m, n) { return '已工作 ' + n + ' 小时'; } },
+    { pattern: /^(?:Timed|计时)\s*(\d+)\s*s(?:econds?)?$/i, replace: function (_m, n) { return '计时 ' + n + ' 秒'; } },
     { pattern: /^(\d+)\s*([smhd])$/i, replace: function (_m, n, unit) {
         return n + ' ' + ({ s: '秒', m: '分钟', h: '小时', d: '天' }[unit.toLowerCase()] || unit);
       } },
@@ -4168,7 +4757,10 @@
     { pattern: /^Select model, current:\s*(.+)$/i, replace: function (_m, model) { return '选择模型，当前：' + model; } },
     { pattern: /^Autocomplete Speed:\s*(.+)$/i, replace: function (_m, speed) { return '补全速度：' + speed; } },
     { pattern: /^Send feedback as\s+(.+)$/i, replace: function (_m, account) { return '以 ' + account + ' 身份发送反馈'; } },
-    { pattern: /^Gemini\s+(.+?)\s+\((High|Medium|Low)\)$/i, replace: function (_m, model, effort) { return 'Gemini ' + model.trim() + '（' + ({ high: '高', medium: '中', low: '低' }[effort.toLowerCase()] || effort) + '）'; } },
+    { pattern: /^(.+?)\s*\((Thinking|High|Medium|Low)\)$/i, replace: function (_m, model, effort) {
+        var dict = { thinking: '思考模式', high: '高', medium: '中', low: '低' };
+        return model.trim() + '（' + (dict[effort.toLowerCase()] || effort) + '）';
+      } },
     { pattern: /^Select (Next|Previous) Conversation$/i, replace: function (_m, direction) { return '选择' + (direction.toLowerCase() === 'next' ? '下一个' : '上一个') + '对话'; } }
   ]);
 
@@ -4178,13 +4770,20 @@
     return translated;
   }
 
-  function translateText(value) { return translatePhrases(value); }
+  function translateText(value) {
+    if (typeof value !== 'string' || value.length === 0 || value.length > 20000) return value;
+    return translatePhrases(value);
+  }
 
   function translateUiText(value) {
-    if (typeof value !== 'string' || value.length === 0) return value;
+    if (typeof value !== 'string' || value.length === 0 || value.length > 5000) return value;
     var leading = (value.match(/^\s*/) || [''])[0];
     var trailing = (value.match(/\s*$/) || [''])[0];
     var body = value.slice(leading.length, value.length - trailing.length || value.length);
+    var exactKey = body.toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(uiLookup, exactKey)) {
+      return leading + uiLookup[exactKey] + trailing;
+    }
     var translated = applyDynamic(translatePhrases(body));
     var key = translated.toLowerCase();
     if (translated && Object.prototype.hasOwnProperty.call(uiLookup, key)) translated = uiLookup[key];
