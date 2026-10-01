@@ -13,7 +13,7 @@ assert.ok(assistant.includes('启动中文版'));
 assert.ok(assistant.includes('恢复英文原版'));
 assert.ok(assistant.includes('CreateDesktopShortcut'));
 assert.ok(assistant.includes('--remote-debugging-port=0'));
-assert.ok(assistant.includes('AssemblyFileVersion("0.4.0.0")'));
+assert.ok(assistant.includes('AssemblyFileVersion("0.4.1.0")'));
 assert.ok(assistant.includes('Antigravity-CdpLocalizationLoader.exe'));
 assert.ok(assistant.includes('localization-extension'));
 assert.ok(!assistant.includes('17897'));

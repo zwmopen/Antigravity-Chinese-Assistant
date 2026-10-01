@@ -11,8 +11,8 @@ using System.Windows.Forms;
 [assembly: AssemblyDescription("外部无侵入 Antigravity 简体中文界面助手")]
 [assembly: AssemblyCompany("Community")]
 [assembly: AssemblyProduct("Antigravity 中文助手")]
-[assembly: AssemblyVersion("0.4.0.0")]
-[assembly: AssemblyFileVersion("0.4.0.0")]
+[assembly: AssemblyVersion("0.4.1.0")]
+[assembly: AssemblyFileVersion("0.4.1.0")]
 
 internal static class AntigravityChineseAssistant
 {

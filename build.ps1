@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 $ErrorActionPreference = 'Stop'
@@ -32,7 +32,8 @@ if ($LASTEXITCODE -ne 0) { throw 'localization_loader_build_failed' }
 $extensionOutput = Join-Path $packageRoot 'localization-extension'
 New-Item -ItemType Directory -Path $extensionOutput -Force | Out-Null
 Copy-Item -Path (Join-Path $source 'localization-extension\*') -Destination $extensionOutput -Recurse -Force
-Copy-Item -LiteralPath (Join-Path $root 'docs\使用说明.txt') -Destination (Join-Path $packageRoot '使用说明.txt') -Force
+$docTxt = (Get-ChildItem -LiteralPath (Join-Path $root 'docs') -Filter '*.txt')[0].FullName
+Copy-Item -LiteralPath $docTxt -Destination (Join-Path $packageRoot '使用说明.txt') -Force
 Copy-Item -LiteralPath (Join-Path $root 'THIRD_PARTY_NOTICES.txt') -Destination (Join-Path $packageRoot '第三方说明.txt') -Force
 
 $manifestPath = Join-Path $packageRoot '文件校验.json'

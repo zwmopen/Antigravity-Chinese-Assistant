@@ -30,6 +30,7 @@
 
 ### 1. 🛡️ 零侵入动态注入：不伤原版分毫
 * **不修改任何官方文件**：绝不解包、不修改 `resources/app.asar` 或 `preload.js`；
+* **纯净安全**：不修改 Windows、Clash 或其他代理配置，不收集或上传任何个人数据与凭证；
 * **随用随走，秒级还原**：完全通过外部加载器挂载。想用中文点“启动中文版”，需要排查问题点“恢复英文原版”，原生官方客户端完好如初。
 
 ### 2. 🧠 智能语义隔离：代码与终端神圣不可侵犯
@@ -45,7 +46,7 @@
 ## 🚀 极简上手指南
 
 ### 选项 A：开箱即用（绿色免安装）
-1. 从 [最新发行版 (Releases)](https://github.com/zwmopen/Antigravity-Chinese-Assistant/releases/latest) 下载 `Antigravity-Chinese-Assistant-0.4.0-windows-x64.zip`；
+1. 从 [最新发行版 (Releases)](https://github.com/zwmopen/Antigravity-Chinese-Assistant/releases/latest) 下载 `Antigravity-Chinese-Assistant-0.4.1-windows-x64.zip`；
 2. **完整解压整个压缩包**到任意目录（切勿单独拖出单个 EXE）；
 3. 双击运行 `Antigravity-Chinese-Assistant.exe`；
 4. 点击 **“启动中文版”** 即可畅享完整中文界面！
@@ -81,3 +82,11 @@ Antigravity 自带完善的本地暂存（Hot Exit）机制，即使关闭，未
 
 * 本项目代码遵循 [MIT 开源许可证](LICENSE)；
 * 本项目为非官方开源社区工具，与 Google 官方无商业隶属关系。相关商标归 Google LLC 所有。
+
+---
+
+## 📝 变更记录
+
+| 日期 (时间) | 执行者 | 记录 |
+|---|---|---|
+| 2026-09-17 23:11 | 💻 本地 PC / 反重力 | 初始化创建文档并补齐变更记录历史 |
